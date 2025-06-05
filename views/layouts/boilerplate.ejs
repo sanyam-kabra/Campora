@@ -10,7 +10,7 @@
 <body class="d-flex flex-column vh-100" style="padding-top: 70px;">
     <%-include('../partials/navbar.ejs')%>
     <main class = 'container'>
-        <%=success%>
+        <%-include('../partials/flash.ejs')%>
         <%-body%>
     </main>
     <%-include('../partials/footer.ejs')%>
