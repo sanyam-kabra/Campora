@@ -3,6 +3,8 @@ const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/expressError');
 const Campground = require('../models/campground');
+const {isLoggedIn} = require('../middlewares');   //Authentication middleware
+
 
 // All campgrounds page
 router.get('/', catchAsync(async (req, res) => {
@@ -10,26 +12,28 @@ router.get('/', catchAsync(async (req, res) => {
     res.render('campgrounds/index', {campgrounds});
 }))
 
+
 // Adding new Camp page
-router.post('/', catchAsync(async(req,res) => {
+router.get('/new', isLoggedIn, (req, res) => {
+  res.render('campgrounds/new');
+})
+
+router.post('/', isLoggedIn, catchAsync(async(req,res) => {
   const campground = new Campground(req.body.campground);
   await campground.save();
   req.flash('success', 'Succesfully created a campground!');
   res.redirect(`/campgrounds/${campground._id}`);
 }))
 
-router.get('/new', (req, res) => {
-  res.render('campgrounds/new');
-})
 
 // Editing Campground 
-router.put('/:id', catchAsync(async(req,res) => {
+router.put('/:id', isLoggedIn, catchAsync(async(req,res) => {
   const campground = await Campground.findByIdAndUpdate(req.params.id, {...req.body.campground});
   req.flash('success', 'Successfully edited the Campground!')
   res.redirect(`/campgrounds/${campground._id}`);
 }))
 
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
   const campground = await Campground.findById(req.params.id);
   if(!campground){
     req.flash('error', 'Cannot find that Campground')
@@ -38,13 +42,15 @@ router.get('/:id/edit', catchAsync(async (req, res) => {
   res.render('campgrounds/edit', {campground});
 }))
 
+
 // Deleting Campground
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
   const {id} = req.params;
   await Campground.findByIdAndDelete(id);
   req.flash('success', 'Successfully deleted the Campground!')
   res.redirect('/campgrounds');
 }))
+
 
 // Details page for a page
 router.get('/:id', catchAsync(async (req, res) => {

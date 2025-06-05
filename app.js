@@ -10,10 +10,14 @@ const ExpressError = require('./utils/expressError');
 const Review = require('./models/review');
 const session = require('express-session');
 const flash = require('connect-flash');
+const User = require('./models/user');
+const passport = require('passport')
+const localStrategy = require('passport-local');
 
 // Routers
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
+const userRoutes  = require('./routes/user');
 
 // connecting to mongoose
 mongoose.connect('mongodb://localhost:27017/campora');
@@ -61,7 +65,16 @@ app.use(session(sessionConfig));
 //configuring flash
 app.use(flash());
 
-app.use((req,res, next) => {
+// configuring passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//middleware to access some contents in all ejs files
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
@@ -70,13 +83,14 @@ app.use((req,res, next) => {
 //express Router middleware
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewRoutes);
+app.use('/', userRoutes);
 
 // Home page
 app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.all(/(.*)/, (req,res, next) => {
+app.all(/(.*)/, (req, res, next) => {
   throw new ExpressError('Page not Found', 404);
 })
 
