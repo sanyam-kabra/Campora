@@ -1,35 +1,35 @@
 <% layout('layouts/boilerplate') %>
     <div class="container mt-3">
         <h1 class="mb-4 text-center">Edit Campground</h1>
-        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST">
+        <form action="/campgrounds/<%=campground._id%>?_method=PUT" class="needs-validation" method="POST" novalidate>
             <div class="row mb-3">
             <div class="col-md-6">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="campground[title]" value = "<%=campground.title%>">
+                <input type="text" class="form-control" id="title" name="campground[title]" value = "<%=campground.title%>" required>
             </div>
             <div class="col-md-6">
                 <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" name="campground[location]" value = "<%=campground.location%>">
+                <input type="text" class="form-control" id="location" name="campground[location]" value = "<%=campground.location%>" required>
             </div>
             </div>
 
             <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="campground[description]" rows="2"><%= campground.description %></textarea>
+            <textarea class="form-control" id="description" name="campground[description]" rows="2"><%= campground.description %></textarea required>
             </div>
 
             <div class="mb-3">
             <label for="price" class="form-label">Price</label>
             <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="text" class="form-control" id="price" name="campground[price]" aria-label="Price" value = "<%=campground.price%>">
+                <input type="text" class="form-control" id="price" name="campground[price]" aria-label="Price" value = "<%=campground.price%>" required>
                 <span class="input-group-text">.00</span>
             </div>
             </div>
 
             <div class="mb-4">
             <label for="image" class="form-label">Image URL</label>
-            <input type="url" class="form-control" id="image" name="campground[image]" value = "<%=campground.image%>">
+            <input type="url" class="form-control" id="image" name="campground[image]" value = "<%=campground.image%>" required>
             </div>
 
             <div class="d-grid">

@@ -29,6 +29,7 @@ const seed = async () => {
             location: `${loc.city}, ${loc.state}`,
             price: price,
             description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, maiores! Officia sunt deserunt molestiae consequatur accusamus inventore, veritatis laudantium iusto expedita sint saepe, dolores error perspiciatis totam odio adipisci porro",
+            author: '6841b2a18e82c178fee0a1f7',
             image: image
         })
         await camp.save();
