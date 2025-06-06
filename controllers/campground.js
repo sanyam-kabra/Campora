@@ -9,7 +9,7 @@ module.exports.renderNewCampForm = (req, res) => {
   res.render('campgrounds/new');
 };
 
-module.exports.AddNewCamp = (req, res) => async(req,res) => {
+module.exports.AddNewCamp = async(req,res) => {
   const campground = new Campground(req.body.campground);
   campground.author = req.user._id;
   await campground.save();
@@ -28,4 +28,26 @@ module.exports.renderEditCampForm = async (req, res) => {
   const {id} = req.params;
   const campground = await Campground.findById(id);
   res.render('campgrounds/edit', {campground});
+}
+
+module.exports.DeleteCamp = async (req, res) => {
+  const {id} = req.params;
+  await Campground.findByIdAndDelete(id);
+  req.flash('success', 'Successfully deleted the Campground!')
+  res.redirect('/campgrounds');
+}
+
+module.exports.ShowCamp = async (req, res) => {
+  const campground = await Campground.findById(req.params.id).populate({
+    path: 'reviews',
+    populate: {
+      path: 'author'
+    }
+  }).populate('author');
+  console.log(campground);
+  if(!campground){
+    req.flash('error', 'Cannot find that Campground')
+    return res.redirect('/campgrounds');
+  }
+  res.render('campgrounds/show', {campground});
 }
