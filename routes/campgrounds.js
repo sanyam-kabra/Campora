@@ -5,15 +5,18 @@ const ExpressError = require('../utils/expressError');
 const Campground = require('../models/campground');
 const {isLoggedIn, isAuthor} = require('../middlewares');   //Authentication middleware
 const campgrounds = require('../controllers/campground');
+const multer  = require('multer');
+const {storage} = require('../cloudinary');
+const upload = multer({storage});
 
 router.route('/')
     .get(catchAsync(campgrounds.AllCampgrounds))
-    .post(isLoggedIn, catchAsync(campgrounds.AddNewCamp))
+    .post(isLoggedIn, upload.array('image'), catchAsync(campgrounds.AddNewCamp))
 
 router.get('/new', isLoggedIn, campgrounds.renderNewCampForm)
 
 router.route('/:id')
-    .put(isLoggedIn, isAuthor, catchAsync(campgrounds.EditCamp))
+    .put(isLoggedIn, isAuthor, upload.array('image'), catchAsync(campgrounds.EditCamp))
     .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.DeleteCamp))
     .get(catchAsync(campgrounds.ShowCamp))
 

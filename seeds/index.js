@@ -16,6 +16,29 @@ db.on('disconnected', () => {
   console.log('MongoDB disconnected');
 });
 
+const images = [
+  {
+    url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749269931/Campora/ulvwjis3kocoy0mn6b8x.jpg',
+    filename: 'Campora/ulvwjis3kocoy0mn6b8x',
+    _id: '6843bdab03d88de4f7a3c963'
+  },
+  {
+    url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749269930/Campora/nvnwuysvn0mfzdt4tjat.jpg',
+    filename: 'Campora/nvnwuysvn0mfzdt4tjat',
+    _id: '6843bdab03d88de4f7a3c964'
+  },
+  {
+    url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749269930/Campora/apextcldnkwst2vaxwpm.jpg',
+    filename: 'Campora/apextcldnkwst2vaxwpm',
+    _id: '6843bdab03d88de4f7a3c965'
+  },
+  {
+    url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749269930/Campora/wvpo9nzce6bowhutuykp.jpg',
+    filename: 'Campora/wvpo9nzce6bowhutuykp',
+    _id: '6843bdab03d88de4f7a3c966'
+  }
+];
+
 const sample = array => array[Math.floor(Math.random()*array.length)];
 
 const seed = async () => {
@@ -23,14 +46,15 @@ const seed = async () => {
     {
         const loc = cities[Math.floor(Math.random()*1000)];
         const price = Math.floor(Math.random()*20) + 10;
-        const image = `https://picsum.photos/seed/${Math.floor(Math.random() * 1000)}/400`;;
+        // Shuffle and select 2
+        const randomImages = images.sort(() => 0.5 - Math.random()).slice(0, 2);
         const camp = new Campground({
             title: `${sample(descriptors)} ${sample(places)}`,
             location: `${loc.city}, ${loc.state}`,
             price: price,
             description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, maiores! Officia sunt deserunt molestiae consequatur accusamus inventore, veritatis laudantium iusto expedita sint saepe, dolores error perspiciatis totam odio adipisci porro",
             author: '6841b2a18e82c178fee0a1f7',
-            image: image
+            images: randomImages
         })
         await camp.save();
         console.log(camp);

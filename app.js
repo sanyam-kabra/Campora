@@ -14,6 +14,10 @@ const User = require('./models/user');
 const passport = require('passport')
 const localStrategy = require('passport-local');
 
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+}
+
 // Routers
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
