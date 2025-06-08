@@ -6,24 +6,36 @@
             <div class="col-md-6">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="campground[title]" value = "<%=campground.title%>" required>
+                <div id="titleFeedback" class="invalid-feedback">
+                    *Required
+                </div>
             </div>
             <div class="col-md-6">
                 <label for="location" class="form-label">Location</label>
                 <input type="text" class="form-control" id="location" name="campground[location]" value = "<%=campground.location%>" required>
+                <div id="locationFeedback" class="invalid-feedback">
+                    *Required
+                </div>
             </div>
             </div>
 
             <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="campground[description]" rows="2"><%= campground.description %></textarea required>
+            <textarea class="form-control" id="description" name="campground[description]" rows="2" required><%= campground.description %></textarea>
+            <div id="descriptionFeedback" class="invalid-feedback">
+                *Required
+            </div>
             </div>
 
             <div class="mb-3">
             <label for="price" class="form-label">Price</label>
             <div class="input-group">
                 <span class="input-group-text">$</span>
-                <input type="text" class="form-control" id="price" name="campground[price]" aria-label="Price" value = "<%=campground.price%>" required>
+                <input type="number" min="0" class="form-control" id="price" name="campground[price]" aria-label="Price" value = "<%=campground.price%>" required>
                 <span class="input-group-text">.00</span>
+                <div id="priceFeedback" class="invalid-feedback">
+                    Required and must be greater than 0.
+                </div>
             </div>
             </div>
 
@@ -53,3 +65,5 @@
             <a href="/campgrounds" class="btn btn-outline-secondary">Back to Campground</a>
         </div>
     </div>
+
+

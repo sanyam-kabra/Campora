@@ -7,10 +7,10 @@
         <% for (let campground of campgrounds) { %>
             <div class="col">
                 <div class="card h-100 shadow-sm">
-                    <img src="<%=campground.images[0].url %>" class="card-img-top" alt="<%= campground.title %>">
+                    <img src="<%=campground.images[0].url%>" height="200" class="card-img-top" alt="<%= campground.title %>">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><%= campground.title %></h5>
-                        <p class="card-text"><%= campground.description %></p>
+                        <p class="card-text"><%= campground.description.slice(0,100) %>...</p>
                         <p class="card-text text-muted fw-semibold">$<%= campground.price %></p>
                         <div class="mt-auto">
                             <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary w-100">View Details</a>

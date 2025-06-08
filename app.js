@@ -1,18 +1,18 @@
 const express = require('express');
 const app = express();
+app.set('query parser', 'extended');
 const path = require('path');
 const mongoose = require('mongoose');
-const Campground = require('./models/campground');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
-const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/expressError');
-const Review = require('./models/review');
 const session = require('express-session');
 const flash = require('connect-flash');
 const User = require('./models/user');
 const passport = require('passport')
 const localStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
+const sanitizeV5 = require('./utils/mongoSanitizeV5.js');
 
 if(process.env.NODE_ENV !== 'production'){
   require('dotenv').config();
@@ -52,6 +52,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 //middleware for public folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(sanitizeV5({ replaceWith: '_' }));
 
 //configuring the session
 const sessionConfig = {
@@ -78,6 +79,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //middleware to access some contents in all ejs files
 app.use((req, res, next) => {
+  console.log(req.query);
   res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');

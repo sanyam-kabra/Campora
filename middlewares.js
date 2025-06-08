@@ -1,5 +1,8 @@
 const Campground = require('./models/campground');
 const Review = require('./models/review');
+const { campgroundSchema, reviewSchema } = require('./schemas.js');
+const ExpressError = require('./utils/expressError');
+
 module.exports.isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated())
     {
@@ -8,6 +11,27 @@ module.exports.isLoggedIn = (req, res, next) => {
         return res.redirect('/login');
     }
     next();
+}
+
+module.exports.validateCampground = (req, res, next) => {
+    const { error } = campgroundSchema.validate(req.body);
+    console.log(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
+}
+
+module.exports.validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next();
+    }
 }
 
 // to store the last page before login from session to locals
