@@ -36,7 +36,52 @@ const images = [
     url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749269930/Campora/wvpo9nzce6bowhutuykp.jpg',
     filename: 'Campora/wvpo9nzce6bowhutuykp',
     _id: '6843bdab03d88de4f7a3c966'
-  }
+  },
+  {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489672/Campora/h4j55e2gnmwrlj7ocfqy.avif',
+        filename: 'Campora/h4j55e2gnmwrlj7ocfqy',
+        _id:'6847180b92e71dc388b60103'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489672/Campora/nrdpisbbiveanog5znzl.jpg',
+        filename: 'Campora/nrdpisbbiveanog5znzl',
+        _id: '6847180b92e71dc388b60104'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489671/Campora/jaatc3vxyggbg96akma6.jpg',
+        filename: 'Campora/jaatc3vxyggbg96akma6',
+        _id: '6847180b92e71dc388b60105'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489672/Campora/ucdbohspzvkq5wpmmjtl.jpg',
+        filename: 'Campora/ucdbohspzvkq5wpmmjtl',
+        _id: '6847180b92e71dc388b60106'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489671/Campora/okpymn9bnx0vigjda0ql.jpg',
+        filename: 'Campora/okpymn9bnx0vigjda0ql',
+        _id: '6847180b92e71dc388b60107'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489693/Campora/weasjf1aqgd6wnspplef.jpg',
+        filename: 'Campora/weasjf1aqgd6wnspplef',
+        _id: '6847181e92e71dc388b6012b'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489693/Campora/ug2cup2zamcnjcglgace.jpg',
+        filename: 'Campora/ug2cup2zamcnjcglgace',
+        _id: '6847181e92e71dc388b6012c'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489693/Campora/qz6svrtvwcnjl7d7i3uh.jpg',
+        filename: 'Campora/qz6svrtvwcnjl7d7i3uh',
+        _id: '6847181e92e71dc388b6012d'
+      },
+      {
+        url: 'https://res.cloudinary.com/dza3arbk1/image/upload/v1749489694/Campora/i1mmysbtapjksdg9y6a4.jpg',
+        filename: 'Campora/i1mmysbtapjksdg9y6a4',
+        _id: '6847181e92e71dc388b6012e'
+      }
 ];
 
 const seed = async () => {

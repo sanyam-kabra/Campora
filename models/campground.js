@@ -42,8 +42,6 @@ const CampgroundSchema = new Schema({
     ]
 }, opts);
 
-CampgroundSchema.index({ geometry: "2dsphere" });
-
 CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
     return `
     <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>

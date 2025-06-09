@@ -18,7 +18,7 @@ module.exports.AllCampgrounds = async (req, res) => {
           [lng, lat] = geoData.features[0].geometry.coordinates;
         } 
         searchedCenter = [lng, lat]; 
-        searchedZoom = 9;  
+        searchedZoom = 12;  
 
         campgrounds = await Campground.find({
             $or: [
