@@ -4,9 +4,39 @@ maptilerClient.config.apiKey = process.env.MAPTILER_API_KEY;
 const {cloudinary} = require('../cloudinary');
 
 module.exports.AllCampgrounds = async (req, res) => {
-    const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', {campgrounds});
-}
+    const { q } = req.query;
+    let campgrounds, searchedCenter, searchedZoom ;
+    if (q && q.trim() !== '') {
+        const geoData = await maptilerClient.geocoding.forward(q, { limit: 1 });
+        let lng, lat;
+        if (
+          geoData &&
+          geoData.features &&
+          geoData.features.length > 0 &&
+          geoData.features[0].geometry
+        ) {
+          [lng, lat] = geoData.features[0].geometry.coordinates;
+        } 
+        searchedCenter = [lng, lat]; 
+        searchedZoom = 9;  
+
+        campgrounds = await Campground.find({
+            $or: [
+                { title: { $regex: q, $options: 'i' } },
+                { location: { $regex: q, $options: 'i' } }
+            ]
+        });
+    } else {
+        campgrounds = await Campground.find({});
+    }
+
+    res.render('campgrounds/index', {
+        campgrounds,
+        query: q,
+        mapCenter: searchedCenter,
+        mapZoom: searchedZoom
+    });
+};
 
 module.exports.renderNewCampForm = (req, res) => {
   res.render('campgrounds/new');

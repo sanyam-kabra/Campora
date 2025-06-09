@@ -3,8 +3,8 @@ maptilersdk.config.apiKey = maptilerApiKey;
 const map = new maptilersdk.Map({
     container: 'map',
     style: maptilersdk.MapStyle.BRIGHT,
-    center: [78.9629, 20.5937],
-    zoom: 4                   
+    center: mapCenter,
+    zoom: mapZoom              
 });
 
 map.on('load', function () {
