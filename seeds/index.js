@@ -44,7 +44,7 @@ const seed = async () => {
   const sample = array => array[Math.floor(Math.random()*array.length)];
     for(let i=0;i<300;i++)
     {
-        const loc = cities[Math.floor(Math.random()*1000)];
+        const loc = cities[Math.floor(Math.random()*528)];
         const price = Math.floor(Math.random()*20) + 10;
         // Shuffle and select 2
         const randomImages = images.sort(() => 0.5 - Math.random()).slice(0, 2);
