@@ -40,19 +40,17 @@ Campora is a full-stack web application for discovering, reviewing, and sharing 
 
 ## Repository Structure
 
-├── app.js # Main application entry point
-├── /controllers # App controller logic (CRUD, search, geocoding)
-├── /models # Mongoose schemas (Campground, Review, User)
-├── /routes # Express routers (campgrounds, reviews, auth)
-├── /views # EJS templates (partials, pages)
-├── /public
-│ ├── /css # Page-specific CSS (campground.css, auth.css, home.css)
-│ └── /javascripts # Map and client-side JS
-├── /utils # Schema, validation utilities
-├── /seeds # Sample data and DB initialization
-├── /uploads # Local temp file storage (Cloudinary integration)
-├── package.json
-└── README.md
+1. **app.js:** Main application entry point
+2. **controllers:** App controller logic (CRUD, search, geocoding)
+3. **models:**Mongoose schemas (Campground, Review, User)
+4. **routes:** Express routers (campgrounds, reviews, auth)
+5. **views:** EJS templates (partials, pages)
+6. **public:**
+    - stylesheets: Page-specific CSS (home.css) 
+    - javascripts:Map and client-side JS
+7. **utils:** Schema, validation utilities
+8. **seeds:** Sample data and DB initialization
+9. **package.json**: Includes all the dependencies
 
 ---
 
@@ -65,15 +63,18 @@ Campora is a full-stack web application for discovering, reviewing, and sharing 
    npm install
 
 2. **Create a .env file (see .env.example) with:**
+    ```bash
     MAPTILER_API_KEY=your_maptiler_api_key
     CLOUDINARY_CLOUD_NAME=...
     CLOUDINARY_KEY=...
     CLOUDINARY_SECRET=...
 
 3. **Seed the database(Optional)**
+    ```bash
     node seeds/index.js
 
 4. **Run app.js**
+    ```bash
     nodemon app.js
 
 ---
