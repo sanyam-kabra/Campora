@@ -2,6 +2,8 @@
 
 Campora is a full-stack web application for discovering, reviewing, and sharing campgrounds. Users can create accounts, add new campgrounds, upload images, write reviews, and search for campgrounds by name or location with an interactive map.
 
+--- 
+
 ## Technologies
 
 - **Backend:** Node.js, Express
@@ -13,6 +15,8 @@ Campora is a full-stack web application for discovering, reviewing, and sharing 
 - **Authentication:** Passport.js with local strategy
 - **Validation:** Joi, Express-Validator, Mongoose schemas
 - **Dev Tools:** dotenv, method-override, connect-flash
+
+--- 
 
 ## Features
 
@@ -42,7 +46,7 @@ Campora is a full-stack web application for discovering, reviewing, and sharing 
 
 1. **app.js:** Main application entry point
 2. **controllers:** App controller logic (CRUD, search, geocoding)
-3. **models:**Mongoose schemas (Campground, Review, User)
+3. **models:** Mongoose schemas (Campground, Review, User)
 4. **routes:** Express routers (campgrounds, reviews, auth)
 5. **views:** EJS templates (partials, pages)
 6. **public:**
@@ -54,7 +58,7 @@ Campora is a full-stack web application for discovering, reviewing, and sharing 
 
 ---
 
-## 🚧 Setup & Installation
+## Setup & Installation
 
 1. **Clone the repository**
    ```bash
