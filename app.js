@@ -14,18 +14,22 @@ const localStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const sanitizeV5 = require('./utils/mongoSanitizeV5.js');
 const helmet = require('helmet');
+const MongoStore = require('connect-mongo');
 
 if(process.env.NODE_ENV !== 'production'){
   require('dotenv').config();
 }
+
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/campora';
 
 // Routers
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 const userRoutes  = require('./routes/user');
 
+//'mongodb://localhost:27017/campora'
 // connecting to mongoose
-mongoose.connect('mongodb://localhost:27017/campora');
+mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on('connected', () => {
   console.log('MongoDB connected successfully!');
@@ -55,8 +59,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(sanitizeV5({ replaceWith: '_' }));
 
+//Setting session store as mongo
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+
 //configuring the session
 const sessionConfig = {
+  store,
   name: 'session',
   secret: 'justatemporarykey',
   resave: false,
